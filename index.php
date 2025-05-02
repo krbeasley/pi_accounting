@@ -10,39 +10,52 @@ require_once './vendor/autoload.php';
 use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable(__DIR__);
 
+// Load the env file
 try {
     $dotenv->load();
 } catch (\Exception $e) {
     echo "Transfer the env file...";
+    die(500);
 }
 
+// Load the dashboard actions
+
+// Get the includes
+try {
+    $head = getAndReplace('includes.head', [
+        'title' => "Home | Pi Accounting",
+        'description' => "",
+        'keywords' => "",
+    ]);
+
+    $header = getAndReplace('includes.header');
+    $footer = getAndReplace('includes.footer', [
+        'year' => date('Y'),
+    ]);
+} catch (\Exception $e) {
+    echo $e->getMessage();
+    die($e->getCode());
+}
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Your Page Title</title>
-    <link rel="stylesheet" href="./src/styles/output.css">
-    <!-- Optionally include any other meta tags or external links here -->
-</head>
+    <?php echo $head; ?>
 <body>
-    <header>
-        <!-- Your header content goes here -->
-    </header>
-    
-    <main>
-        <h1 class='text-xl font-black'>HELLO WORLD</h1>
+    <?php echo $header; ?>
+
+    <main class='w-full flex flex-col items-center justify-start'>
+        <div class='w-11/12 max-w-[1200px] flex flex-wrap gap-10 items-center justify-center'>
+
+        <?php 
+        ?>
+            
+        </div>
     </main>
-    
-    <footer>
-        <!-- Your footer content goes here -->
-    </footer>
-    
+
+    <?php echo $footer; ?>
+
     <script src="./src/js/app.js"></script>
-    <!-- Optionally include other scripts here -->
 </body>
 </html>
