@@ -22,6 +22,34 @@ try {
 // Load the dashboard actions
 $dash_actions = DashActions::load();
 
+/*
+$dash_actions->addAction([
+    "type" => "GET",
+    "name" => "Bullhorn Report 1",
+    "domain" => "www.bullhorn.com",
+    "uri" => "/api/reports/1"
+]);
+
+$dash_actions->addAction([
+    "type" => "GET",
+    "name" => "Bullhorn Report 2",
+    "domain" => "www.bullhorn.com",
+    "uri" => "/api/reports/2"
+]);
+
+$dash_actions->addAction([
+    "type" => "EXE",
+    "name" => "Format WC Pay Report",
+    "path" => "/storage/scripts/format_wc_pay_report.py",
+]);
+
+$dash_actions->addAction([
+    "type" => "EXE",
+    "name" => "Merge Avionte and iSolved WC",
+    "path" => "/storage/scripts/merge_avionte_and_isolved_wc_reports.py",
+]);
+*/
+
 // Get the includes
 try {
     $head = getAndReplace('includes.head', [
@@ -44,20 +72,23 @@ try {
 <!DOCTYPE html>
 <html lang="en">
     <?php echo $head; ?>
-<body>
-    <?php echo $header; ?>
+    <body>
+        <script>
+            // inject any server side values into the front end here
+            const dashActions = <?php echo $dash_actions->json() ?>;
+        </script>
 
-    <main class='w-full flex flex-col items-center justify-start'>
-        <div class='w-11/12 max-w-[1200px] flex flex-wrap gap-10 items-center justify-center'>
+        <?php echo $header; ?>
 
-        <?php 
-        ?>
-            
-        </div>
-    </main>
+        <main class='w-full flex flex-col items-center justify-start'>
+            <div id='actions-container' class='w-11/12 max-w-[1200px] flex flex-wrap gap-10 items-center justify-center'>
+               <!-- Dashboard actions are created by the page's javascript --> 
+            </div>
+        </main>
 
-    <?php echo $footer; ?>
+        <?php echo $footer; ?>
 
-    <script src="./src/js/app.js"></script>
-</body>
+        <script src="./src/js/dashboard.js" type='module'></script>
+        <script src="./src/js/app.js"></script>
+    </body>
 </html>
