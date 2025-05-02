@@ -8,9 +8,10 @@ error_reporting(E_ALL);
 require_once './vendor/autoload.php';
 
 use Dotenv\Dotenv;
-$dotenv = Dotenv::createImmutable(__DIR__);
+use App\DashActions\DashActions;
 
 // Load the env file
+$dotenv = Dotenv::createImmutable(__DIR__);
 try {
     $dotenv->load();
 } catch (\Exception $e) {
@@ -19,6 +20,7 @@ try {
 }
 
 // Load the dashboard actions
+$dash_actions = DashActions::load();
 
 // Get the includes
 try {

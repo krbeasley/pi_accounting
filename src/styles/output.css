@@ -164,6 +164,9 @@
   }
 }
 @layer utilities {
+  .static {
+    position: static;
+  }
   .contents {
     display: contents;
   }
