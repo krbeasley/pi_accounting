@@ -9,7 +9,13 @@ require_once './vendor/autoload.php';
 
 use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable(__DIR__);
-$dotenv->load();
+
+try {
+    $dotenv->load();
+} catch (\Exception $e) {
+    echo "Transfer the env file...";
+}
+
 
 ?>
 
@@ -29,7 +35,7 @@ $dotenv->load();
     </header>
     
     <main>
-        <h1 class='text-6xl font-black'>HELLO WORLD</h1>
+        <h1 class='text-xl font-black'>HELLO WORLD</h1>
     </main>
     
     <footer>
