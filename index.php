@@ -22,33 +22,10 @@ try {
 // Load the dashboard actions
 $dash_actions = DashActions::load();
 
-/*
-$dash_actions->addAction([
-    "type" => "GET",
-    "name" => "Bullhorn Report 1",
-    "domain" => "www.bullhorn.com",
-    "uri" => "/api/reports/1"
-]);
+// $dash_actions->genTestData();
 
-$dash_actions->addAction([
-    "type" => "GET",
-    "name" => "Bullhorn Report 2",
-    "domain" => "www.bullhorn.com",
-    "uri" => "/api/reports/2"
-]);
+// $dash_actions->save();
 
-$dash_actions->addAction([
-    "type" => "EXE",
-    "name" => "Format WC Pay Report",
-    "path" => "/storage/scripts/format_wc_pay_report.py",
-]);
-
-$dash_actions->addAction([
-    "type" => "EXE",
-    "name" => "Merge Avionte and iSolved WC",
-    "path" => "/storage/scripts/merge_avionte_and_isolved_wc_reports.py",
-]);
-*/
 
 // Get the includes
 try {
@@ -80,7 +57,7 @@ try {
 
         <?php echo $header; ?>
 
-        <main class='w-full flex flex-col items-center justify-start'>
+        <main class='w-full flex flex-col items-center justify-start py-20'>
             <div id='actions-container' class='w-11/12 max-w-[1200px] flex flex-wrap gap-10 items-center justify-center'>
                <!-- Dashboard actions are created by the page's javascript --> 
             </div>

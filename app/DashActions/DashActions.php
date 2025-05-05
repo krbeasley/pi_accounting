@@ -49,4 +49,38 @@ class DashActions {
     public function addAction(array $action_details) : void {
         $this->contents[] = $action_details;
     }
+
+    public function genTestData() : self {
+        $this->addAction([
+            "type" => "GET",
+            "name" => "Bullhorn Report 1",
+            "domain" => "www.bullhorn.com",
+            "uri" => "/api/reports/1",
+            "thumbnail" => "./src/img/logos/bullhorn/Bullhorn_logo_linear.png"
+        ]);
+
+        $this->addAction([
+            "type" => "GET",
+            "name" => "Bullhorn Report 2",
+            "domain" => "www.bullhorn.com",
+            "uri" => "/api/reports/2",
+            "thumbnail" => "./src/img/logos/bullhorn/Bullhorn_logo_linear.png"
+        ]);
+
+        $this->addAction([
+            "type" => "EXE",
+            "name" => "Format WC Pay Report",
+            "path" => "format-wc-pay-report",
+            "thumbnail" => "./src/img/logos/bullhorn/Bullhorn_logo_linear.png"
+        ]);
+
+        $this->addAction([
+            "type" => "EXE",
+            "name" => "Merge Avionte and iSolved WC",
+            "path" => "merge-avionte-isolved-wc",
+            "thumbnail" => "./src/img/logos/isolved/isolved_logo_color_pos_RGB.png"
+        ]);
+
+        return $this;
+    }
 }
