@@ -10,7 +10,7 @@ export const dashTile = (tileInfo) => {
     const type = tileInfo.type;
     const uri = tileInfo.uri;
     const domain = tileInfo.domain;
-    const path = tileInfo.path;
+    const script_name = tileInfo.script_name;
     const thumb = tileInfo.thumbnail;
 
     // Tile Element
@@ -20,7 +20,7 @@ export const dashTile = (tileInfo) => {
         'hover:shadow-md', 'flex', 'flex-col', 'relative', 'border-1',
         'border-neutral-200', 'cursor-pointer'
     );
-    tile.href = (domain) ? `https://${domain}${uri}` : `./worker.php?sn=${path}`; 
+    tile.href = (domain) ? `https://${domain}${uri}` : `./worker.php?sn=${script_name}`; 
 
     // Tile Thumbnail 
     let thumbnail = document.createElement('img');

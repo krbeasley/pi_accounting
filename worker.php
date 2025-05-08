@@ -8,16 +8,29 @@ error_reporting(E_ALL);
 require_once './vendor/autoload.php';
 
 use Dotenv\Dotenv;
+use App\DashActions\Action;
 
 // Load the env file
 $dotenv = Dotenv::createImmutable(__DIR__);
 try {
     $dotenv->load();
 } catch (\Exception $e) {
-    echo "Transfer the env file...";
+    echo "Kyle forgot to transfer the env file...";
     die(500);
 }
 
+// What worker script needs to run?
+$script_name = $_GET['sn'];
+
+// Error message if no script name or bad script name provided
+if (empty($script_name)) {
+    echo "<h2>Please provide a script name (or just click a link like a normal person)</h2>";
+    echo "<a href='./index.php'>Go Home</a>";
+    die(400);
+}
+
+// Get the action
+$action = Action::loadForScript($script_name);
 
 // Get the includes
 try {
@@ -44,19 +57,23 @@ try {
     <body>
         <script>
             // inject any server side values into the front end here
+            const script_name = <?php echo "'" . $script_name . "'" ?>;
         </script>
 
         <?php echo $header; ?>
 
         <main class='w-full flex flex-col items-center justify-start py-20'>
-            <div id='actions-container' class='w-11/12 max-w-[1200px] flex flex-wrap gap-10 items-center justify-center'>
-               <!-- Dashboard actions are created by the page's javascript --> 
+            <p class='text-center text-3xl font-black'><?php echo $worker_title ?? "Worker Title Goes Here"; ?></p>
+
+            <div id='worker-frame' class="bg-neutral-200 relative flex flex-col">
+                <form id='worker-form' class='' action="" method="post">
+                    <input name='script_name' type="text" class="opacity-10"/>
+                </form>
             </div>
         </main>
 
         <?php echo $footer; ?>
 
-        <script src="./src/js/dashboard.js" type='module'></script>
         <script src="./src/js/app.js"></script>
     </body>
 </html>
