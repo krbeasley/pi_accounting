@@ -1,1 +1,20 @@
-[]
+[
+    {
+        "name" : "Merge Avionte and iSolved WC Reports",
+        "path" : "merge_avionte_isolved_wc.py",
+        "thumbnail" : "src/img/logos/avionte/avionte_full_color.png",
+        "arguments" : {
+            "isolved" : "file",
+            "avionte" : "file"
+        }
+    },
+    {
+        "name" : "Test Report",
+        "path" : "test_report.py",
+        "thumbnail" : "src/img/logos/avionte/avionte_full_color.png",
+        "arguments" : {
+            "mock_data_1" : "file"
+        }
+    }
+
+]

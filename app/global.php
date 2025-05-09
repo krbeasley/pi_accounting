@@ -1,5 +1,11 @@
 <?php
 
+function dd(mixed ...$values) {
+    echo "<pre>";
+    var_dump($values);
+    echo "</pre>";
+}
+
 function recursiveArraySearch(array $contents, array $searchElements) : mixed
 {
     // get the end of the array to find what the user is ultimately looking for
@@ -15,7 +21,8 @@ function recursiveArraySearch(array $contents, array $searchElements) : mixed
             $contents = $contents[$searchElements[0]];
         }
         catch (\Exception) {
-            throw new Exception("Error while searching for '{$searchElements[0]}' element. Please ensure that config element exists.");
+            throw new Exception("Error while searching for '{$searchElements[0]}' element. " 
+                . "Please ensure that config element exists.");
         }
         // drop the first element from the search elements for the next go around
         array_shift($searchElements);
@@ -63,4 +70,18 @@ function getAndReplace(string $view, array $replacements = []) : string
     }
 
     return $contents;
+}
+
+function reArrayFiles(&$file_post) {
+    $file_ary = array();
+    $file_count = count($file_post['name']);
+    $file_keys = array_keys($file_post);
+
+    for ($i=0; $i<$file_count; $i++) {
+        foreach ($file_keys as $key) {
+            $file_ary[$i][$key] = $file_post[$key][$i];
+        }
+    }
+
+    return $file_ary;
 }

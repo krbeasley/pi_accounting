@@ -5,42 +5,53 @@ const typeIcons = {
     "NONE" : "./src/img/icons/action-types/magic-wand.svg"
 };
 
-export const dashTile = (tileInfo) => {
-    const name = tileInfo.name;
-    const type = tileInfo.type;
-    const uri = tileInfo.uri;
-    const domain = tileInfo.domain;
-    const script_name = tileInfo.script_name;
-    const thumb = tileInfo.thumbnail;
+function genWorkerURL(parameters) {
+    const host = window.location.host;
+    const protocol = window.location.protocol;
+    let parameterString = '?';
 
+    for (let key in parameters) {
+        parameterString += `${key}=${parameters[key]}&`;
+    }
+
+    parameterString = parameterString.slice(0, -1);
+    return `${protocol}//${host}/worker.php${parameterString}`;
+}
+
+export const dashTile = (tileName, scriptName, tileThumbnail) => {
     // Tile Element
     let tile = document.createElement('a');
     tile.classList.add(
-        'w-1/5', 'bg-neutral-200', 'rounded-md', 'h-35', 'min-w-30',
-        'hover:shadow-md', 'flex', 'flex-col', 'relative', 'border-1',
-        'border-neutral-200', 'cursor-pointer'
+        'w-1/5', 'rounded-md', 'h-35', 'min-w-30', 'cursor-pointer',
+        'hover:shadow-md', 'flex', 'flex-col', 'relative', 'border-1'
     );
-    tile.href = (domain) ? `https://${domain}${uri}` : `./worker.php?sn=${script_name}`; 
+    tile.href = genWorkerURL({"sn" : scriptName, "tn" : tileName});
 
     // Tile Thumbnail 
     let thumbnail = document.createElement('img');
     thumbnail.classList.add('w-full', 'h-20', 'object-scale-down', 'object-center',
     'inset-shadown-md', 'bg-white', 'p-2', 'pt-4', 'rounded-t-md');
-    thumbnail.src = thumb;
+    thumbnail.src = tileThumbnail;
     tile.appendChild(thumbnail);
 
     // Tile Title
     let title = document.createElement('p');
-    title.innerText = name;
+    title.innerText = tileName;
     title.classList.add('text-lg', 'font-bold', 'text-sm', 'text-center', 'p-2',
     'justify-self-center');
     tile.appendChild(title);
 
-    // Tile Icon
-    let icon = document.createElement('img');
-    icon.src = typeIcons[type.toUpperCase()] ?? "NONE";
-    icon.classList.add('h-6', 'w-6', 'p-1', 'absolute', 'top-[1px]', 'right-[1px]', 'opacity-60');
-    tile.appendChild(icon);
+    // Conditional Colors
+    if (tileName.toLowerCase().includes('isolved')) {
+        tile.classList.add('bg-pink-300', 'border-pink-300');
+        title.classList.add('text-black');
+    } else if (tileName.toLowerCase().includes('bullhorn')) {
+        tile.classList.add('bg-orange-300', 'border-orange-300');
+        title.classList.add('text-black');
+    } else {
+        tile.classList.add('bg-neutral-300', 'border-neutral-300');
+        title.classList.add('text-black');
+    }
 
     return tile;
 }

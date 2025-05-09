@@ -18,6 +18,7 @@ try {
     die(500);
 }
 
+$dash_actions = file_get_contents('./storage/dash_actions.json');
 
 // Get the includes
 try {
@@ -44,13 +45,14 @@ try {
     <body>
         <script>
             // inject any server side values into the front end here
+            const dashActions = <?php echo $dash_actions; ?>;
         </script>
 
         <?php echo $header; ?>
 
         <main class='w-full flex flex-col items-center justify-start py-20'>
             <div id='actions-container' class='w-11/12 max-w-[1200px] flex flex-wrap gap-10 items-center justify-center'>
-               <!-- Dashboard actions are created by the page's javascript --> 
+                <!-- Dashboard actions are created by the page's javascript --> 
             </div>
         </main>
 
