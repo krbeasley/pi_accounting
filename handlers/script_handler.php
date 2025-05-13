@@ -119,9 +119,14 @@ foreach ($files as $upload_name => $file) {
 $shell_command = "cd /var/www/pi_accounting/storage/scripts; ./$script_name";
 
 // Attach arguments to the script name 
-$shell_command = $shell_command . $arg_string;
+$shell_command = $shell_command . $arg_string . "2>&1";
 
 // Call the target script and grab the output.
 $output = shell_exec($shell_command);
+
+// YOU LEFT OFF HERE
+
+// FOR SOME REASON THE PHP IS NOT WAITING FOR THE PYTHON TO RUN
+// THAT OR THE PYTHON IS FAILING IN BUT NOT IN TESTING
 
 dd($script_name, $files, $output, $shell_command);
