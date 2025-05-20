@@ -3,5 +3,7 @@ vendor/
 .idea/
 .vscode/
 .env
-.pi_venv/
 storage/uploads/*
+storage/scripts/.pi_venv/
+storage/downloads/*
+storage/logs/*
