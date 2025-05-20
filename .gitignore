@@ -3,6 +3,5 @@ vendor/
 .idea/
 .vscode/
 .env
-storage/scripts/*
-!storage/scripts/test_report.py
+.pi_venv/
 storage/uploads/*
